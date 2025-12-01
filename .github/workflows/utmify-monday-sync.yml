@@ -1,0 +1,41 @@
+name: UTMify → Monday Sync
+
+on:
+  # Manual trigger
+  workflow_dispatch:
+    inputs:
+      dashboard:
+        description: 'Dashboard name'
+        required: true
+        default: 'Maria Clara'
+      days:
+        description: 'Number of days to sync'
+        required: true
+        default: '7'
+
+  # Scheduled run - every day at 8:00 AM (Brasilia time = 11:00 UTC)
+  schedule:
+    - cron: '0 11 * * *'
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Run UTMify-Monday Sync
+        env:
+          UTMIFY_EMAIL: ${{ secrets.UTMIFY_EMAIL }}
+          UTMIFY_PASSWORD: ${{ secrets.UTMIFY_PASSWORD }}
+          MONDAY_API_KEY: ${{ secrets.MONDAY_API_KEY }}
+        run: |
+          DASHBOARD="${{ github.event.inputs.dashboard || 'Maria Clara' }}"
+          DAYS="${{ github.event.inputs.days || '7' }}"
+          node utmify_monday_sync.js --dashboard "$DASHBOARD" --days "$DAYS"

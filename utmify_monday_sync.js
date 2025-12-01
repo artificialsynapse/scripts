@@ -15,7 +15,8 @@
 
 const https = require('https');
 
-// Configuration
+// Configuration - use environment variables or fallback defaults
+// For GitHub Actions, set these as repository secrets
 const CONFIG = {
   utmify: {
     email: process.env.UTMIFY_EMAIL || 'contatolc01@proton.me',
