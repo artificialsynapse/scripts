@@ -23,7 +23,7 @@ const CONFIG = {
     serverUrl: 'server.utmify.com.br'
   },
   monday: {
-    apiKey: process.env.MONDAY_API_KEY || '',
+    apiKey: process.env.MONDAY_API_KEY || 'eyJhbGciOiJIUzI1NiJ9.eyJ0aWQiOjU5MjM0MjYwNCwiYWFpIjoxMSwidWlkIjo3MDY3MDc1OSwiaWFkIjoiMjAyNS0xMi0wMVQxNTowMjo1MS4yODlaIiwicGVyIjoibWU6d3JpdGUiLCJhY3RpZCI6MjczODY5OTMsInJnbiI6InVzZTEifQ.xUKmlJyQQ5HDerzdG6rf-Nz2f3AGcSGIP_ojrZgukHs',
     boardId: process.env.MONDAY_BOARD_ID || '18282099872',
     // Column mappings: UTMify metric -> Monday column ID
     columns: {
