@@ -365,7 +365,12 @@ async function main() {
 
     // 2. Get dashboards and find matching one
     console.log('📊 Fetching dashboards...');
-    const dashboards = await utmify.getDashboards();
+    const dashboardsResponse = await utmify.getDashboards();
+
+    // Handle both array and object responses
+    const dashboards = Array.isArray(dashboardsResponse)
+      ? dashboardsResponse
+      : (dashboardsResponse.dashboards || dashboardsResponse.data || []);
 
     const dashboard = dashboards.find(d =>
       d.name?.toLowerCase().includes(dashboardName.toLowerCase())
