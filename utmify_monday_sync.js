@@ -60,7 +60,7 @@ function httpsRequest(options, body = null) {
       });
     });
     req.on('error', reject);
-    req.setTimeout(30000, () => { req.destroy(); reject(new Error('Request timeout')); });
+    req.setTimeout(60000, () => { req.destroy(); reject(new Error('Request timeout')); });
     if (body) req.write(JSON.stringify(body));
     req.end();
   });
@@ -88,7 +88,9 @@ class UTMifyAPI {
       headers: {
         'Accept': 'application/json',
         'Authorization': `Basic ${basicAuth}`,
-        'Origin': 'https://app.utmify.com.br'
+        'Origin': 'https://app.utmify.com.br',
+        'Referer': 'https://app.utmify.com.br/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       }
     });
 
@@ -109,7 +111,10 @@ class UTMifyAPI {
       method: 'GET',
       headers: {
         'Accept': 'application/json',
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': `Bearer ${this.token}`,
+        'Origin': 'https://app.utmify.com.br',
+        'Referer': 'https://app.utmify.com.br/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       }
     });
 
@@ -129,7 +134,10 @@ class UTMifyAPI {
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${this.token}`
+        'Authorization': `Bearer ${this.token}`,
+        'Origin': 'https://app.utmify.com.br',
+        'Referer': 'https://app.utmify.com.br/',
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36'
       }
     }, {
       dashboardId,
